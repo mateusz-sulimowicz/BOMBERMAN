@@ -110,8 +110,11 @@ private:
                     .x = (uint16_t) (random() % params.size_x),
                     .y = (uint16_t) (random() % params.size_y)
             };
-            state.blocks.insert(new_block_pos);
-            events.emplace_back(BlockPlaced{new_block_pos});
+
+            if (!state.blocks.contains(new_block_pos)) {
+                state.blocks.insert(new_block_pos);
+                events.emplace_back(BlockPlaced{new_block_pos});
+            }
         }
     }
 
